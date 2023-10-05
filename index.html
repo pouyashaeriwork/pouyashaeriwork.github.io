@@ -1,19 +1,69 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Calculator</title>
+    <title>Slider Calculator</title>
+    <style>
+        /* CSS to make the sliders wider */
+        .slider {
+            width: 50%; /* Adjust the width as needed */
+        }
+    </style>
 </head>
 <body>
-    <h1>Calculator</h1>
-    <form id="calculator-form">
-        Variable 1: <input type="text" id="var1"><br>
-        Variable 2: <input type="text" id="var2"><br>
-        Variable 3: <input type="text" id="var3"><br>
-        Variable 4: <input type="text" id="var4"><br>
-        <input type="submit" value="Calculate">
-    </form>
-    <p>Result: <span id="result"></span></p>
-    <script src="script.js"></script>
+    <div class="slider-container">
+        <label for="slider1">Slider 1:</label>
+        <input type="range" id="slider1" min="0" max="100" value="50" class="slider">
+        <span id="slider1-value">50</span>
+    </div>
+
+    <div class="slider-container">
+        <label for="slider2">Slider 2:</label>
+        <input type="range" id="slider2" min="0" max="100" value="50" class="slider">
+        <span id="slider2-value">50</span>
+    </div>
+
+    <div class="slider-container">
+        <label for="slider3">Slider 3:</label>
+        <input type="range" id="slider3" min="0" max="100" value="50" class="slider">
+        <span id="slider3-value">50</span>
+    </div>
+
+    <div class="slider-container">
+        <label for="slider4">Slider 4:</label>
+        <input type="range" id="slider4" min="0" max="100" value="50" class="slider">
+        <span id="slider4-value">50</span>
+    </div>
+
+    <button id="calculate-button">Calculate</button>
+
+    <div id="result-container">
+        <p>Sum: <span id="result-value">0</span></p>
+    </div>
+
+    <script>
+        // JavaScript code for slider value updates
+        document.addEventListener('input', function (e) {
+            if (e.target && e.target.classList.contains('slider')) {
+                const sliderId = e.target.id;
+                const value = e.target.value;
+                const valueSpanId = sliderId + '-value';
+                document.getElementById(valueSpanId).textContent = value;
+            }
+        });
+
+        // JavaScript code for your calculation and result display here
+        document.getElementById('calculate-button').addEventListener('click', function () {
+            const slider1Value = parseInt(document.getElementById('slider1').value);
+            const slider2Value = parseInt(document.getElementById('slider2').value);
+            const slider3Value = parseInt(document.getElementById('slider3').value);
+            const slider4Value = parseInt(document.getElementById('slider4').value);
+
+            // Calculate the sum
+            const sum = slider1Value + slider2Value + slider3Value + slider4Value;
+
+            // Update the result
+            document.getElementById('result-value').textContent = sum;
+        });
+    </script>
 </body>
 </html>
