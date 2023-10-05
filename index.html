@@ -5,7 +5,7 @@
     <style>
         /* CSS to make the sliders wider */
         .slider {
-            width: 50%; /* Adjust the width as needed */
+            width: 40%; /* Adjust the width as needed */
         }
     </style>
 </head>
@@ -48,21 +48,15 @@
                 const value = e.target.value;
                 const valueSpanId = sliderId + '-value';
                 document.getElementById(valueSpanId).textContent = value;
+                // Send slider values to the Shiny app
+                Shiny.setInputValue(sliderId, value);
             }
         });
 
-        // JavaScript code for your calculation and result display here
-        document.getElementById('calculate-button').addEventListener('click', function () {
-            const slider1Value = parseInt(document.getElementById('slider1').value);
-            const slider2Value = parseInt(document.getElementById('slider2').value);
-            const slider3Value = parseInt(document.getElementById('slider3').value);
-            const slider4Value = parseInt(document.getElementById('slider4').value);
-
-            // Calculate the sum
-            const sum = slider1Value + slider2Value + slider3Value + slider4Value;
-
-            // Update the result
-            document.getElementById('result-value').textContent = sum;
+        // JavaScript code to receive and update the result from Shiny
+        Shiny.addCustomMessageHandler("updateResult", function(result) {
+            // Update the result on the page
+            document.getElementById('result-value').textContent = result;
         });
     </script>
 </body>
