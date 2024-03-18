@@ -1,63 +1,23 @@
-<!DOCTYPE html>
 <html>
 <head>
-    <title>Slider Calculator</title>
+    <title>Crop GIF Example</title>
     <style>
-        /* CSS to make the sliders wider */
-        .slider {
-            width: 40%; /* Adjust the width as needed */
+        .gif-container {
+            overflow: hidden;
+            height: calc(100% - 40px); /* Adjust height as needed */
+        }
+        
+        .gif-container img {
+            margin-top: -40px; /* Shift the image upwards */
+            width: 100%; /* Optional: makes the image responsive */
+            height: auto; /* Maintain aspect ratio */
         }
     </style>
 </head>
 <body>
-    <div class="slider-container">
-        <label for="slider1">Slider 1:</label>
-        <input type="range" id="slider1" min="0" max="100" value="50" class="slider">
-        <span id="slider1-value">50</span>
+    <div class="gif-container">
+        <img src="Images/Preview.gif" alt="Cropped GIF">
     </div>
 
-    <div class="slider-container">
-        <label for="slider2">Slider 2:</label>
-        <input type="range" id="slider2" min="0" max="100" value="50" class="slider">
-        <span id="slider2-value">50</span>
-    </div>
-
-    <div class="slider-container">
-        <label for="slider3">Slider 3:</label>
-        <input type="range" id="slider3" min="0" max="100" value="50" class="slider">
-        <span id="slider3-value">50</span>
-    </div>
-
-    <div class="slider-container">
-        <label for="slider4">Slider 4:</label>
-        <input type="range" id="slider4" min="0" max="100" value="50" class="slider">
-        <span id="slider4-value">50</span>
-    </div>
-
-    <button id="calculate-button">Calculate</button>
-
-    <div id="result-container">
-        <p>Sum: <span id="result-value">0</span></p>
-    </div>
-
-    <script>
-        // JavaScript code for slider value updates
-        document.addEventListener('input', function (e) {
-            if (e.target && e.target.classList.contains('slider')) {
-                const sliderId = e.target.id;
-                const value = e.target.value;
-                const valueSpanId = sliderId + '-value';
-                document.getElementById(valueSpanId).textContent = value;
-                // Send slider values to the Shiny app
-                Shiny.setInputValue(sliderId, value);
-            }
-        });
-
-        // JavaScript code to receive and update the result from Shiny
-        Shiny.addCustomMessageHandler("updateResult", function(result) {
-            // Update the result on the page
-            document.getElementById('result-value').textContent = result;
-        });
-    </script>
 </body>
 </html>
