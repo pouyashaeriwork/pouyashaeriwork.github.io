@@ -27,8 +27,23 @@
     <div class="gif-container">
         <img src="Images/Preview.gif" alt="Cropped GIF">
     </div>
-
-    <script src="pleaserotate.js"></script>
+    <script>
+    	var portrait = window.innerWidth < window.innerHeight;
+    	var PleaseRotateOptions = {
+    		onlyMobile: false,
+    		forcePortrait: !portrait,
+    		startOnPageLoad: true,
+    		onHide: function() {},
+    		onShow: function() {},
+    		forcePortrait: false,
+    		message: "Please Rotate Your Device",
+    		subMessage: "(or click to continue)",
+    		allowClickBypass: true,
+    		zIndex: 1000,
+    		iconNode: null
+    	}
+    </script>
+    <script src="https://www.robscanlon.com/pleaserotate/pleaserotate.min.js"></script>
     
 </body>
 </html>
